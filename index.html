@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>I Loviu</title>
+  <style>
+    body {
+      background: #fff0f5;
+      color: #333;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding-top: 100px;
+      overflow: hidden;
+    }
+
+    #fecha {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    .corazones {
+      font-size: 2em;
+      color: red;
+      animation: saltar 0.5s ease infinite alternate;
+    }
+
+    @keyframes saltar {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+
+    #contenedor {
+      cursor: pointer;
+    }
+
+    .rosa {
+      position: absolute;
+      top: -50px;
+      width: 30px;
+      height: 30px;
+      animation: llover 5s linear infinite;
+    }
+
+    @keyframes llover {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="contenedor">
+    <div id="fecha">07 de julio de 2025</div>
+    <div id="corazones" style="display: none;">❤️ ❤️ ❤️ ❤️ ❤️</div>
+  </div>
+
+  <script>
+    const contenedor = document.getElementById('contenedor');
+    const fecha = document.getElementById('fecha');
+    const corazones = document.getElementById('corazones');
+    let mostrandoCorazones = false;
+
+    contenedor.addEventListener('click', () => {
+      mostrandoCorazones = !mostrandoCorazones;
+      if (mostrandoCorazones) {
+        fecha.style.display = 'none';
+        corazones.style.display = 'block';
+      } else {
+        fecha.style.display = 'block';
+        corazones.style.display = 'none';
+      }
+    });
+
+    // Función para generar rosas
+    function crearRosa() {
+      const rosa = document.createElement('div');
+      rosa.classList.add('rosa');
+      rosa.style.left = Math.random() * 100 + 'vw';
+      rosa.innerHTML = '🌹';
+      document.body.appendChild(rosa);
+
+      setTimeout(() => {
+        rosa.remove();
+      }, 5000);
+    }
+
+    // Hacer que lluevan rosas cada 300ms
+    setInterval(crearRosa, 300);
+  </script>
+
+</body>
+</html>
